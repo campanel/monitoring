@@ -1,0 +1,82 @@
+<html>
+  <head>
+    <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+    <style type="text/css">
+    html{
+            font-family:  Arial, 'Helvetica Neue', Helvetica, sans-serif;
+            font-size: 12px;
+             background-color: #F1F1F1;
+
+        }
+      .table {
+          display:table;
+      }
+      .header {
+          display:table-header-group;
+          font-weight:bold;
+      }
+      .row {
+          display:table-row;
+
+      }
+      .row_line{ 
+   padding: 2px 2px 2px 3px;    
+   border-width: 2px;
+
+   border-top-width:2px;
+   border-top-color:White;
+   border-top-style: solid;
+
+      }
+
+      .rowGroup {
+          display:table-row-group;
+      }
+      .cell {
+          display:table-cell;
+          width:30%;
+      }
+      .cellmini {
+          display:table-cell;
+          width:4%;
+      }
+      .celltime {
+          display:table-cell;
+          width:12%;
+      }
+      .celltxt {
+          display:table-cell;
+          width:50%;
+      }
+    </style>
+
+  </head>
+  <body>
+    <h2>History Status Hosts</h2>
+    <div id='messagesDiv'></div>
+    <script>
+      var myDataRef = new Firebase('https://opmons.firebaseio.com/netcentrics/statushosts');
+
+      myDataRef.on('child_added', function(snapshot) {
+        var message = snapshot.val();
+        displayChatMessage(message.hostname, message.address, message.hoststate, message.hoststatetype, message.hostoutput, message.lasthostcheck);
+      });
+
+      function displayChatMessage(hostname, address, hoststate, hoststatetype, hostoutput, lasthostcheck) {
+        $('<div/>').addClass('row')
+          .append($('<div/>').addClass('celltime').addClass('row_line').text('['+lasthostcheck+']'))
+          .append($('<div/>').addClass('cell').addClass('row_line').text(hostname))
+          .append($('<div/>').addClass('celltime').addClass('row_line').text(address))
+          .append($('<div/>').addClass('cellmini').addClass('row_line').text(hoststate))
+          .append($('<div/>').addClass('cellmini').addClass('row_line').text(hoststatetype))
+          .append($('<div/>').addClass('celltxt').addClass('row_line').text(hostoutput))
+        
+          .appendTo($('#messagesDiv'));
+        $('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
+      };
+    </script>
+
+
+  </body>
+</html>
