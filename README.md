@@ -1,12 +1,6 @@
 # Monitoring
 
-Esses codigos servem para monitoramento baseado em Nagios, OpMon, NSclient++...
+These codes are used for monitoring based Nagios, OpMon, NSclient++...
 
-
-
-## Quer contribuir?
-Sinta-se a vontade!
-
-
-## License
 --
+Feel free to contribute
