@@ -9,4 +9,4 @@ Sinta-se a vontade!
 
 
 ## License
-See [LICENSE](LICENSE)
+--
